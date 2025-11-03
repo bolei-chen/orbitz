@@ -4,7 +4,7 @@ import operator
 
 
 class State(TypedDict):
-    messages: Annotated[list[AnyMessage], operator.add] = []
+    messages: Annotated[list[AnyMessage], operator.add]
 
 
 def new_state() -> State:

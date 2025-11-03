@@ -5,7 +5,7 @@ import os
 
 from langgraph.graph import END, START, StateGraph
 from langchain_core.messages import HumanMessage
-from langchain_anthropic import ChatAnthropic  
+from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import MemorySaver
 
 from market_news_advisor.agents.advicer.node import advicer
@@ -20,13 +20,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-anthropic_api_key = os.getenv("CLAUDE_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 class MNA:
-    def __init__(self, model: str = "claude-sonnet-4-5-20250929") -> None:
-        self.llm = ChatAnthropic(
+    def __init__(self, model: str = "gpt-4.1-mini") -> None:
+        self.llm = ChatOpenAI(
             model=model,
-            api_key=anthropic_api_key,
+            api_key=OPENAI_API_KEY,
             temperature=0.0,
         )
         self.checkpointer = MemorySaver()
