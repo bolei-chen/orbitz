@@ -1,0 +1,19 @@
+# run `conda env create -f environment.yml` to create the environment
+# run `conda env update -f environment.yml` to update the environment
+
+name: orbitz
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - langgraph
+      - langchain
+      - langchain-core
+      - langchain-community
+      - langchain-anthropic
+      - python-dotenv
+      - httpx
+      - requests
+      - typing-extensions
