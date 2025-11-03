@@ -11,8 +11,12 @@ from langgraph.checkpoint.memory import MemorySaver
 from market_news_advisor.agents.advicer.node import advicer
 from market_news_advisor.agents.filter_dedupe.node import filter_dedupe
 from market_news_advisor.agents.formatter.node import formatter
-from market_news_advisor.agents.researchers.ai.node import ai_researcher
-from market_news_advisor.agents.researchers.markets.node import markets_researcher
+from market_news_advisor.agents.researchers.foundation_model.node import foundation_model_researcher
+from market_news_advisor.agents.researchers.faang.node import faang_researcher
+from market_news_advisor.agents.researchers.chips.node import chips_researcher
+from market_news_advisor.agents.researchers.energy.node import energy_researcher
+from market_news_advisor.agents.researchers.fed_macro.node import fed_macro_researcher
+from market_news_advisor.agents.researchers.biotech.node import biotech_researcher
 from market_news_advisor.agents.state import State, new_state
 from market_news_advisor.agents.summarizer.node import summarizer
 
@@ -36,17 +40,12 @@ class MNA:
     def _build_graph(self):
         graph = StateGraph(State)
 
-        graph.add_node("ai_researcher", ai_researcher)
-        graph.add_node("markets_researcher", markets_researcher)
         graph.add_node("filter_dedupe", filter_dedupe)
         graph.add_node("summarizer", summarizer)
         graph.add_node("formatter", formatter)
         graph.add_node("advicer", lambda state: advicer(state, self.llm))
 
-        graph.add_edge(START, "ai_researcher")
 
-        graph.add_edge("ai_researcher", "markets_researcher")
-        graph.add_edge("markets_researcher", "filter_dedupe")
         graph.add_edge("filter_dedupe", "summarizer")
         graph.add_edge("summarizer", "formatter")
         graph.add_edge("formatter", "advicer")
