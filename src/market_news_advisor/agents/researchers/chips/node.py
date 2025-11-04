@@ -4,8 +4,11 @@ from market_news_advisor.agents.state import State
 from market_news_advisor.agents.researchers.research import research
 from .prompt import chips_researcher_system
 from langchain_core.messages import AIMessage
+from logging import Logger
 
 
-def chips_researcher(state: State) -> State:
+def chips_researcher(state: State, logger: Logger) -> State:
+    logger.info("researching computer chips...")
     research_log = research(chips_researcher_system)
-    return {"messages": [AIMessage(content=research_log)]}
+    return {"messages": [AIMessage(content=research_log)], 
+            "researched": ["chips"]}

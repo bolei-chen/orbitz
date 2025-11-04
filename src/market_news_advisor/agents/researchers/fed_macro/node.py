@@ -6,10 +6,13 @@ from market_news_advisor.agents.researchers.research import research
 from market_news_advisor.agents.state import State
 
 from .prompt import fed_macro_researcher_system
+from logging import Logger
 
 
-def fed_macro_researcher(state: State) -> State:
+def fed_macro_researcher(state: State, logger: Logger) -> State:
+    logger.info("researching federal reserve and macro...")
     research_log = research(fed_macro_researcher_system)
-    return {"messages": [AIMessage(content=research_log)]}
+    return {"messages": [AIMessage(content=research_log)],
+            "researched": ["fed_macro"]}
 
 

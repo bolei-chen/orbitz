@@ -9,5 +9,6 @@ Tell me about the recent news and how it affects the financial market.
 """
 
 state = mna.forward(query, me)
-
-print(state)
+print(state["summary"])
+print("-" * 100)
+print(state["advice"])

@@ -8,6 +8,8 @@ dependencies:
   - python=3.11
   - pip
   - pip:
+      - langgraph-cli[inmem]
+      - "langgraph[studio]"
       - langgraph
       - langchain
       - langchain-core
