@@ -12,7 +12,8 @@ from logging import Logger
 def fed_macro_researcher(state: State, logger: Logger) -> State:
     logger.info("researching federal reserve and macro...")
     research_log = research(fed_macro_researcher_system)
-    return {"messages": [AIMessage(content=research_log)],
-            "researched": ["fed_macro"]}
+    state["messages"].append(AIMessage(content=research_log))
+    state["researches"]["fed_macro"]["fed_macro"] = research_log
+    return state
 
 

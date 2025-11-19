@@ -18,7 +18,7 @@ def research(prompt: str) -> str:
         tools=[
             {"type": "web_search"}
         ],
-        reasoning={"effort": "medium"},
+        reasoning={"effort": "low"},
         max_output_tokens=1200,
         input=prompt,
     )

@@ -8,4 +8,6 @@ def advicer(state: State, llm: BaseLanguageModel, logger: Logger) -> State:
     logger.info("advicing...")
     system_message = SystemMessage(content=advicer_system.strip())
     response = llm.invoke([system_message, *state["messages"]])
-    return {"messages": [response], "advice": response.content}
+    state["messages"].append(response)
+    state["advice"] = response.content
+    return state
